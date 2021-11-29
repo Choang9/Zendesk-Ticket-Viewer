@@ -1,0 +1,20 @@
+/* main view */
+.tickets {
+  border-collapse: collapse;
+  width: 100%;
+}
+.tickets td, .tickets th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.tickets tr:nth-child(even){background-color: #f2f2f2;}
+
+.tag {
+  border: 1px solid black;
+  margin: 0px 5px;
+  padding: 4px;
+}
+
+#page-nav {
+  margin-top: 10px;
+}

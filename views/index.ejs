@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Ticket Viewer</title>
+  <link rel="stylesheet" type="text/css" href="app.css">
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
+  <script src="simplepagination.js"></script>
+ 
+  <link rel="stylesheet" href="simplepagination.css">
+</head>
+<body>
+  <h2> Mobile Ticket Viewer</h2>
+ <div>
+    <% if (tickets.length > 0) { %> 
+      <table class="tickets">
+        <tr>
+          <th>Subject</th>
+          <th>Description</th>
+          <th>Tags</th>
+        </tr>
+      <% tickets.forEach((ticket, index)=>  { %>
+          <tr class="paginate">
+            <td><a href=<%=`/ticket/${ticket.id}`%>><%= ticket.subject %></a> </td>
+            <td><%= ticket.description.length > 40 ? `${ticket.description.substring(0, 40)}...`: ticket.description %>  </td>
+            <td><% ticket.tags.forEach(tag => { %>
+                <span class="tag"><%= tag %> </span>
+          <% }) %>  
+              </td>  
+          </tr>     
+     <% }) %>
+    </table>
+    <div id="page-nav">
+    </div>
+    <% } else { %> 
+      <p>No tickets to display...</p>
+    <% } %> 
+ </div>
+ <script>
+
+jQuery(function($) {
+    // Grab whatever we need to paginate
+    const pageParts = $(".paginate");
+    // How many parts do we have?
+    const numPages = pageParts.length;
+    // How many parts do we want per page?
+    const perPage = 25;
+
+    // When the document loads we're on page 1
+    // So to start with... hide everything else
+    pageParts.slice(perPage).hide();
+    // Apply simplePagination to our placeholder
+    $("#page-nav").pagination({
+        items: numPages,
+        itemsOnPage: perPage,
+        cssStyle: "light-theme",
+        // We implement the actual pagination
+        //   in this next function. It runs on
+        //   the event that a user changes page
+        onPageClick: function(pageNum) {
+            // Which page parts do we show?
+            const start = perPage * (pageNum - 1);
+            const end = start + perPage;
+
+            // First hide all page parts
+            // Then show those just for our page
+            pageParts.hide()
+                     .slice(start, end).show();
+        }
+    });
+});
+ </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Ticket Viewer</title>
+</head>
+<body>
+  <div>
+    <h2>Ticket Details</h2>
+    <p>Subject: <%= ticket && ticket.subject %> </p>
+    <p>Description: <%= ticket && ticket.description %> </p>
+    <p>Date created: <%= ticket && Date(ticket.created_at) %> </p>
+    <button class="button"><a href="/">Back to all tickets</a></button>
+  </div>
+</body>
+</html>
