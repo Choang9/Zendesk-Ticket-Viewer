@@ -49,3 +49,5 @@ app.get('/ticket/:id', (req, res) => {
 });
 
 const server = app.listen(port);
+
+module.exports = server;
